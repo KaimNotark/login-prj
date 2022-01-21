@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <EmailInput />
+    <PasswordInput />
   </div>
 </template>
 
 <script>
-import EmailInput from "./components/EmailInput.vue";
+import PasswordInput from "./components/PasswordInput.vue";
 
 export default {
   name: "App",
   components: {
-    EmailInput,
+    PasswordInput,
   },
 };
 </script>
