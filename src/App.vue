@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <LoginForm />
+    <div id="wrapper" class="wrapper">
+      <LoginPage />
+    </div>
   </div>
 </template>
 
 <script>
-import LoginForm from "./components/LoginForm.vue";
+import LoginPage from "./components/LoginPage.vue";
 
 export default {
   name: "App",
   components: {
-    LoginForm,
+    LoginPage,
   },
 };
 </script>
@@ -23,12 +25,15 @@ export default {
 
 $font-family-primary: "Roboto", "Verdana", "Arial", sans-serif;
 
+.wrapper *,
+.wrapper *::before,
+.wrapper *::after {
+  box-sizing: border-box;
+}
+
 #app {
   font-family: $font-family-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

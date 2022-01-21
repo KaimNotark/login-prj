@@ -104,9 +104,18 @@ export default {
   color: $color-text-main;
 }
 
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .form {
   width: 560px;
-  height: 339px;
+  height: 270px;
   background-color: $color-white;
   padding: 0px 32px 0px 32px;
   border-radius: 16px;
