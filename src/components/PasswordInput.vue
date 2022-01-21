@@ -71,8 +71,6 @@ export default {
       this.payloadPassword.isValid = this.$refs.provider.flags.valid;
 
       this.$emit("dataFromPasswordInput", this.payloadPassword);
-
-      console.log("this.payloadPassword", this.payloadPassword);
     },
   },
 };

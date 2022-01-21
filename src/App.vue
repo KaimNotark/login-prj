@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <PasswordInput />
+    <LoginForm />
   </div>
 </template>
 
 <script>
-import PasswordInput from "./components/PasswordInput.vue";
+import LoginForm from "./components/LoginForm.vue";
 
 export default {
   name: "App",
   components: {
-    PasswordInput,
+    LoginForm,
   },
 };
 </script>
