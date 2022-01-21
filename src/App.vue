@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <EmailInput />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import EmailInput from "./components/EmailInput.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    EmailInput,
+  },
+};
 </script>
 
 <style lang="scss">
