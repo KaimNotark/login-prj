@@ -108,7 +108,6 @@ export default {
     @extend %text;
 
     &__word {
-      @extend %text;
       font-weight: 600;
     }
   }
@@ -133,8 +132,6 @@ export default {
   }
 }
 
-.__is-true {
-}
 .__is-false {
   display: none;
 }
