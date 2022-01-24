@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <div id="wrapper" class="wrapper">
-      <LoginPage />
+      <StartPage />
     </div>
   </div>
 </template>
 
 <script>
-import LoginPage from "./components/LoginPage.vue";
+import StartPage from "./components/start-page/StartPage.vue";
 
 export default {
   name: "App",
   components: {
-    LoginPage,
+    StartPage,
   },
 };
 </script>

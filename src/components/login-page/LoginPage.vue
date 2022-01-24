@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../stylesheets/variables.scss";
+@import "../../stylesheets/variables.scss";
 
 .login-page-container {
   position: absolute;

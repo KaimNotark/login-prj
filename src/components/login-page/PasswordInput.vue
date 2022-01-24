@@ -1,33 +1,34 @@
 <template>
-  <div class="email-input-container">
-    <label class="email-input__label">
+  <div class="password-input-container">
+    <label class="password-input__label">
       <ValidationProvider
-        class="email-input__validator"
-        name="E-MAIL"
+        class="password-input__validator"
+        name="ПАРОЛЬ"
         ref="provider"
         v-slot="{ valid, errors }"
         :bails="false"
         :rules="{
           required: true,
-          email: true,
-          min: 3,
-          max: 80,
+          email: false,
+          min: 6,
+          max: 20,
         }"
       >
-        <span class="email-input__errors-text" :class="`__is-${valid}`">{{
+        <!-- mode="lazy" -->
+        <span class="password-input__errors-text" :class="`__is-${valid}`">{{
           errors[0]
         }}</span>
 
         <input
-          class="email-input__input"
+          class="password-input__input"
           v-model="value"
-          inputTitle="e-mail"
+          inputTitle="password"
           inputPattern=""
-          type="email"
-          name="email"
-          maxlength="80"
-          autocomplete="on"
-          placeholder="Введите E-mail"
+          type="password"
+          name="password"
+          maxlength="20"
+          autocomplete="off"
+          placeholder="Введите пароль"
           required
           spellcheck="false"
           @change="changeInput()"
@@ -51,14 +52,14 @@ Object.keys(rules).forEach((rule) => {
 localize("ru", ru);
 
 export default {
-  name: "EmailInput",
+  name: "PasswordInput",
 
   components: {
     ValidationProvider,
   },
 
   data: () => ({
-    payloadEmail: {
+    payloadPassword: {
       value: "",
       isValid: false,
     },
@@ -66,18 +67,18 @@ export default {
 
   methods: {
     changeInput() {
-      this.payloadEmail.value = this.value;
-      this.payloadEmail.isValid = this.$refs.provider.flags.valid;
+      this.payloadPassword.value = this.value;
+      this.payloadPassword.isValid = this.$refs.provider.flags.valid;
 
-      this.$emit("dataFromEmailInput", this.payloadEmail);
+      this.$emit("dataFromPasswordInput", this.payloadPassword);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../stylesheets/variables.scss";
-@import "../stylesheets/resets.scss";
+@import "../../stylesheets/variables.scss";
+@import "../../stylesheets/resets.scss";
 
 %text-input {
   color: $color-text-main;
@@ -101,7 +102,7 @@ textarea:focus {
   border: 1px solid $color-input-focus;
 }
 
-.email-input {
+.password-input {
   &-container {
     margin-top: 1px;
   }

@@ -92,7 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../stylesheets/variables.scss";
+@import "../../stylesheets/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 %title {
