@@ -4,8 +4,8 @@
       <div class="header-container">
         <button class="header-button" @click="login">Авторизация</button>
         <p class="header-text">
-          <span class="header-text__word" :class="`__is-${isLogin}`">Yes</span>
-          <span class="header-text__word" :class="`__is-${isLogin}`">No</span>
+          <span class="header-text__word __green" v-if="isLogin">Yes</span>
+          <span class="header-text__word __red" v-if="!isLogin">No</span>
         </p>
       </div>
     </header>
@@ -38,6 +38,7 @@ export default {
   methods: {
     login() {
       console.log("btn login");
+      this.isLogin = !this.isLogin;
     },
   },
 };
@@ -57,14 +58,26 @@ export default {
   font-family: Montserrat;
 }
 
+.start-page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100vh;
+}
+
 .header {
+  padding-top: 30px;
+
   &-container {
+    display: flex;
+    justify-content: flex-end;
   }
 
   &-button {
     width: 150px;
     height: 36px;
-    margin: 7px -16px 16px 0px;
+    margin: 7px 17px 7px 0px;
     border: solid 1px $color-button-background-blue;
     background: $color-button-background-blue;
     border-radius: 6px;
@@ -96,12 +109,14 @@ export default {
 
     &__word {
       @extend %text;
+      font-weight: 600;
     }
   }
 }
 
 .main {
   &-container {
+    height: calc(100vh - (80px + 90px));
   }
 
   &-text {
@@ -115,14 +130,18 @@ export default {
 
   &-author {
     @extend %text;
-
   }
 }
 
 .__is-true {
-  color: green;
 }
 .__is-false {
+  display: none;
+}
+.__green {
+  color: green;
+}
+.__red {
   color: red;
 }
 </style>
