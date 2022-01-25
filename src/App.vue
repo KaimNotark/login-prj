@@ -1,19 +1,26 @@
 <template>
   <div id="app">
     <div id="wrapper" class="wrapper">
-      <StartPage />
+      <LoginPage @addFeedback="addFeedback"/>
     </div>
   </div>
 </template>
 
 <script>
-import StartPage from "./components/start-page/StartPage.vue";
+import LoginPage from "./components/login-page/LoginPage.vue";
 
 export default {
   name: "App",
+
   components: {
-    StartPage,
+    LoginPage,
   },
+
+  methods: {
+    addFeedback(data) {
+      console.log("App.", data);
+    }
+  }
 };
 </script>
 

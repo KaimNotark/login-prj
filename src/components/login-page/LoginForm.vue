@@ -5,7 +5,7 @@
       id="formId"
       name="form"
       autocomplete="on"
-      @submit="onSubmit"
+      @submit.prevent.stop="onSubmit"
     >
       <div class="form-header">
         <h2 class="form-header__title">Авторизация</h2>
@@ -61,13 +61,9 @@ export default {
 
     validation() {
       this.isFormValid = this.isEmailValid && this.isPasswordValid;
-      console.log("isFormValid", this.isFormValid);
     },
 
     onSubmit(event) {
-      event.preventDefault();
-      event.stopPropagation();
-
       this.validation();
 
       if (this.isFormValid) {
@@ -76,15 +72,9 @@ export default {
           password: this.passwordValue,
         };
 
-        // this.$emit("addFeedback", payload);
+        this.$emit("addFeedback", payload);
 
         event.target.reset();
-
-        console.log("Запрос на сервер отправлен.", payload);
-      } else {
-        console.log(
-          "Форма заполнена не полностью. Пожалуйста, заполните все поля."
-        );
       }
     },
   },
