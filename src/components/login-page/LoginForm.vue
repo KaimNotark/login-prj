@@ -20,7 +20,7 @@
 
       <div class="form-footer">
         <button type="submit" class="form-footer__submit-button">
-          Авторизоваться
+          Войти
         </button>
       </div>
     </form>
@@ -92,6 +92,7 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: $color-text-main;
+  letter-spacing: 1px;
 }
 
 .login-form-container {
@@ -161,6 +162,7 @@ export default {
       font-weight: 600;
       font-size: 14px;
       line-height: 20px;
+      letter-spacing: 1px;
       transition: background-color 0.1s ease, border-color 0.3s ease;
       cursor: pointer;
     }

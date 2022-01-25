@@ -1,5 +1,6 @@
 <template>
   <div class="login-page-container">
+    <p class="login-page-error-message">{{ errorMessage }}</p>
     <LoginForm @addFeedback="addFeedback" />
   </div>
 </template>
@@ -14,6 +15,10 @@ export default {
   components: {
     LoginForm,
   },
+
+  data: () => ({
+    errorMessage: "",
+  }),
 
   methods: {
     async addFeedback(payload) {
@@ -32,16 +37,16 @@ export default {
 
           switch (error.code) {
             case "auth/invalid-email":
-              console.log("E-mail не верный.");
+              this.errorMessage = "E-mail не верный.";
               break;
             case "auth/user-not-found":
-              console.log("Нет пользователя с таким E-mail.");
+              this.errorMessage = "Нет пользователя с таким E-mail.";
               break;
             case "auth/wrong-password":
-              console.log("Пароль не верный.");
+              this.errorMessage = "Пароль не верный.";
               break;
             default:
-              console.log("Пароль или E-mail не правельные.");
+              this.errorMessage = "Пароль или E-mail не правельные.";
               break;
           }
         });
@@ -58,5 +63,9 @@ export default {
   min-width: 100%;
   min-height: 100%;
   background: rgba(0, 0, 0, 0.5);
+}
+
+.login-page-error-message {
+  color: red;
 }
 </style>
