@@ -17,6 +17,11 @@ export default {
 
   data: () => ({
     errorMessage: "",
+
+    user: {
+      accessToken: "",
+      email: "",
+    },
   }),
 
   methods: {
@@ -29,6 +34,10 @@ export default {
         .then((data) => {
           console.log("addFeedback-firebase-Signed in:", data);
 
+          this.user.email = data.user.email;
+          this.user.accessToken = data.user.accessToken;
+
+          this.saveToStorage(this.user);
           this.$emit("addFeedback", data);
         })
         .catch((error) => {
@@ -61,6 +70,11 @@ export default {
         autoHideDelay: 5000,
         toaster: "b-toaster-bottom-center",
       });
+    },
+
+    saveToStorage(user) {
+      localStorage.email = user.email;
+      localStorage.accessToken = user.accessToken;
     },
   },
 };
