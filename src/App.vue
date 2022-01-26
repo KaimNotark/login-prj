@@ -1,19 +1,20 @@
 <template>
   <div id="app">
     <div id="wrapper" class="wrapper">
-      <LoginPage @addFeedback="addFeedback"/>
+      <router-view></router-view>
     </div>
   </div>
 </template>
+      // <StartPage @addFeedback="addFeedback"/>
 
 <script>
-import LoginPage from "./components/login-page/LoginPage.vue";
+// import StartPage from "./components/start-page/StartPage.vue";
 
 export default {
   name: "App",
 
   components: {
-    LoginPage,
+    // StartPage,
   },
 
   methods: {
