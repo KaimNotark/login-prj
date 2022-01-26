@@ -1,6 +1,5 @@
 <template>
   <div class="login-page-container">
-    <p class="login-page-error-message">{{ errorMessage }}</p>
     <LoginForm @addFeedback="addFeedback" />
   </div>
 </template>
@@ -21,12 +20,12 @@ export default {
   }),
 
   methods: {
-    async addFeedback(payload) {
-      console.log("LoginPage--addFeedback-RUN", payload);
+    async addFeedback({ email, password }) {
+      console.log("LoginPage--addFeedback-RUN", email, password);
 
       const auth = getAuth();
 
-      await signInWithEmailAndPassword(auth, payload.email, payload.password)
+      await signInWithEmailAndPassword(auth, email, password)
         .then((data) => {
           console.log("addFeedback-firebase-Signed in:", data);
 
@@ -38,18 +37,30 @@ export default {
           switch (error.code) {
             case "auth/invalid-email":
               this.errorMessage = "E-mail не верный.";
+              this.makeToast();
               break;
             case "auth/user-not-found":
               this.errorMessage = "Нет пользователя с таким E-mail.";
+              this.makeToast();
               break;
             case "auth/wrong-password":
               this.errorMessage = "Пароль не верный.";
+              this.makeToast();
               break;
             default:
               this.errorMessage = "Пароль или E-mail не правельные.";
+              this.makeToast();
               break;
           }
         });
+    },
+
+    makeToast() {
+      this.$bvToast.toast(this.errorMessage, {
+        title: "Ошибка",
+        autoHideDelay: 5000,
+        toaster: "b-toaster-bottom-center",
+      });
     },
   },
 };

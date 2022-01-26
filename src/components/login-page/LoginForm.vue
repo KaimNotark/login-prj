@@ -106,7 +106,7 @@ export default {
 
 .form {
   width: 560px;
-  height: 270px;
+  height: 280px;
   background-color: $color-white;
   padding: 0px 32px 0px 32px;
   border-radius: 16px;
@@ -152,7 +152,7 @@ export default {
     &__submit-button {
       width: 150px;
       height: 36px;
-      margin: 7px -16px 16px 0px;
+      margin: 0px -16px 16px 0px;
       border: solid 1px $color-button-background-blue;
       background: $color-button-background-blue;
       border-radius: 6px;
