@@ -26,18 +26,14 @@ export default {
 
   methods: {
     async addFeedback({ email, password }) {
-      console.log("LoginPage--addFeedback-RUN", email, password);
-
       const auth = getAuth();
 
       await signInWithEmailAndPassword(auth, email, password)
         .then((data) => {
-          console.log("addFeedback-firebase-Signed in:", data);
-
           this.user.email = data.user.email;
           this.user.accessToken = data.user.accessToken;
-
           this.saveToStorage(this.user);
+
           this.$emit("addFeedback", data);
         })
         .catch((error) => {
@@ -72,9 +68,9 @@ export default {
       });
     },
 
-    saveToStorage(user) {
-      localStorage.email = user.email;
-      localStorage.accessToken = user.accessToken;
+    saveToStorage({ email, accessToken }) {
+      localStorage.email = email;
+      localStorage.accessToken = accessToken;
     },
   },
 };
