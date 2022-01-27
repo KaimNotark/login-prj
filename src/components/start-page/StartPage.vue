@@ -3,6 +3,9 @@
     <header class="header">
       <div class="header-container">
         <button class="header-button" @click="logout">Выйти</button>
+        <button class="header-button" @click="$router.push({ name: 'login' })">
+          Войти
+        </button>
         <p class="header-text">
           <span class="header-text__word __green" v-if="isLogin">Yes</span>
           <span class="header-text__word __red" v-if="!isLogin">No</span>

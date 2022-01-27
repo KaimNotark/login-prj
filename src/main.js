@@ -32,7 +32,7 @@ const analytics = getAnalytics(app);
 
 new Vue({
   render: (h) => h(App),
-  router: router,
+  router,
 }).$mount("#app");
 
 export default (analytics, app);
