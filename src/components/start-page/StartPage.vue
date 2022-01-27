@@ -36,7 +36,7 @@
     </main>
 
     <footer class="footer">
-      <p class="footer-author">Прищепов Александр</p>
+      <p class="footer-author">&copy; Прищепов Александр</p>
     </footer>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
 
   methods: {
     logout() {
-      this.isLogin = false;
+      this.isLogin = !this.isLogin;
 
       localStorage.email = "";
       localStorage.accessToken = "";
