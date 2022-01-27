@@ -8,21 +8,46 @@
   </div>
 </template>
 //
-<StartPage @addFeedback="addFeedback" />
 
 <script>
-// import StartPage from "./components/start-page/StartPage.vue";
-
 export default {
   name: "App",
 
-  components: {
-    // StartPage,
+  data: () => ({
+    user: {
+      email: "",
+      accessToken: "",
+    },
+
+    isLogin: false,
+  }),
+
+  mounted() {
+    this.getDataFromLocalStorage();
+    this.isUserLogin();
+    this.pageSelection();
   },
 
   methods: {
     addFeedback(data) {
       console.log("App.", data);
+    },
+
+    getDataFromLocalStorage() {
+      this.user.email = localStorage.email;
+      this.user.accessToken = localStorage.accessToken;
+    },
+
+    isUserLogin() {
+      this.isLogin = this.user.accessToken === "" ? false : true;
+    },
+
+    pageSelection() {
+      if (this.isLogin) {
+        this.$router.push({ name: "start" }).catch(() => {});
+      } else {
+        this.$router.push({ name: "login" }).catch(() => {});
+      }
     },
   },
 };
