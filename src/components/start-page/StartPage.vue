@@ -2,7 +2,10 @@
   <div class="start-page-container">
     <header class="header">
       <div class="header-container">
-        <button class="header-button" @click="login">Авторизация</button>
+        <button class="header-button" @click="logout">Выйти</button>
+        <button class="header-button" @click="$router.push({ name: 'login' })">
+          Войти
+        </button>
         <p class="header-text">
           <span class="header-text__word __green" v-if="isLogin">Yes</span>
           <span class="header-text__word __red" v-if="!isLogin">No</span>
@@ -36,9 +39,12 @@ export default {
   }),
 
   methods: {
-    login() {
-      console.log("btn login");
+    logout() {
+      console.log("btn logout");
       this.isLogin = !this.isLogin;
+
+      localStorage.email = "";
+      localStorage.accessToken = "";
     },
   },
 };

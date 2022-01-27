@@ -1,18 +1,29 @@
 <template>
   <div id="app">
     <div id="wrapper" class="wrapper">
-      <StartPage />
+      <transition name="fade">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
+//
+<StartPage @addFeedback="addFeedback" />
 
 <script>
-import StartPage from "./components/start-page/StartPage.vue";
+// import StartPage from "./components/start-page/StartPage.vue";
 
 export default {
   name: "App",
+
   components: {
-    StartPage,
+    // StartPage,
+  },
+
+  methods: {
+    addFeedback(data) {
+      console.log("App.", data);
+    },
   },
 };
 </script>
@@ -35,5 +46,14 @@ $font-family-primary: "Roboto", "Verdana", "Arial", sans-serif;
   font-family: $font-family-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

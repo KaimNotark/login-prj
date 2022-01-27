@@ -5,7 +5,7 @@
       id="formId"
       name="form"
       autocomplete="on"
-      @submit="onSubmit"
+      @submit.prevent.stop="onSubmit"
     >
       <div class="form-header">
         <h2 class="form-header__title">Авторизация</h2>
@@ -20,7 +20,7 @@
 
       <div class="form-footer">
         <button type="submit" class="form-footer__submit-button">
-          Авторизоваться
+          Войти
         </button>
       </div>
     </form>
@@ -61,13 +61,9 @@ export default {
 
     validation() {
       this.isFormValid = this.isEmailValid && this.isPasswordValid;
-      console.log("isFormValid", this.isFormValid);
     },
 
     onSubmit(event) {
-      event.preventDefault();
-      event.stopPropagation();
-
       this.validation();
 
       if (this.isFormValid) {
@@ -76,15 +72,9 @@ export default {
           password: this.passwordValue,
         };
 
-        // this.$emit("addFeedback", payload);
+        this.$emit("addFeedback", payload);
 
         event.target.reset();
-
-        console.log("Запрос на сервер отправлен.", payload);
-      } else {
-        console.log(
-          "Форма заполнена не полностью. Пожалуйста, заполните все поля."
-        );
       }
     },
   },
@@ -102,6 +92,7 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: $color-text-main;
+  letter-spacing: 1px;
 }
 
 .login-form-container {
@@ -115,7 +106,7 @@ export default {
 
 .form {
   width: 560px;
-  height: 270px;
+  height: 280px;
   background-color: $color-white;
   padding: 0px 32px 0px 32px;
   border-radius: 16px;
@@ -161,7 +152,7 @@ export default {
     &__submit-button {
       width: 150px;
       height: 36px;
-      margin: 7px -16px 16px 0px;
+      margin: 0px -16px 16px 0px;
       border: solid 1px $color-button-background-blue;
       background: $color-button-background-blue;
       border-radius: 6px;
@@ -171,6 +162,7 @@ export default {
       font-weight: 600;
       font-size: 14px;
       line-height: 20px;
+      letter-spacing: 1px;
       transition: background-color 0.1s ease, border-color 0.3s ease;
       cursor: pointer;
     }
