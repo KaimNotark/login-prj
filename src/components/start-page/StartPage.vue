@@ -2,14 +2,25 @@
   <div class="start-page-container">
     <header class="header">
       <div class="header-container">
-        <button class="header-button" @click="logout">Выйти</button>
-        <button class="header-button" @click="$router.push({ name: 'login' })">
+        <p class="header-text">
+          Пользователь:
+          <span class="header-text__word __green" v-if="!isLogin">{{
+            email
+          }}</span>
+          <span class="header-text__word __red" v-if="isLogin"
+            >Отсутствует</span
+          >
+        </p>
+        <button class="header-button" @click="logout" v-if="!isLogin">
+          Выйти
+        </button>
+        <button
+          class="header-button"
+          @click="$router.push({ name: 'login' })"
+          v-if="isLogin"
+        >
           Войти
         </button>
-        <p class="header-text">
-          <span class="header-text__word __green" v-if="isLogin">Yes</span>
-          <span class="header-text__word __red" v-if="!isLogin">No</span>
-        </p>
       </div>
     </header>
 
@@ -25,7 +36,7 @@
     </main>
 
     <footer class="footer">
-      <p class="footer-author">Прищепов Александр</p>
+      <p class="footer-author">&copy; Прищепов Александр</p>
     </footer>
   </div>
 </template>
@@ -36,16 +47,20 @@ export default {
 
   data: () => ({
     isLogin: false,
+    email: "",
   }),
 
   methods: {
     logout() {
-      console.log("btn logout");
       this.isLogin = !this.isLogin;
 
       localStorage.email = "";
       localStorage.accessToken = "";
     },
+  },
+
+  created() {
+    this.email = localStorage.email;
   },
 };
 </script>
@@ -77,7 +92,7 @@ export default {
 
   &-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   &-button {
@@ -93,6 +108,7 @@ export default {
     font-weight: 600;
     font-size: 14px;
     line-height: 20px;
+    letter-spacing: 1px;
     transition: background-color 0.1s ease, border-color 0.3s ease;
     cursor: pointer;
   }
@@ -112,6 +128,8 @@ export default {
 
   &-text {
     @extend %text;
+    margin-top: auto;
+    font-weight: 600;
 
     &__word {
       font-weight: 600;
@@ -122,6 +140,7 @@ export default {
 .main {
   &-container {
     height: calc(100vh - (80px + 90px));
+    padding-top: 20px;
   }
 
   &-text {

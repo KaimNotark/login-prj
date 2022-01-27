@@ -20,11 +20,11 @@
 
         <input
           class="email-input__input"
+          name="email"
           v-model="value"
           inputTitle="e-mail"
           inputPattern=""
           type="email"
-          name="email"
           maxlength="80"
           autocomplete="on"
           placeholder="Введите E-mail"

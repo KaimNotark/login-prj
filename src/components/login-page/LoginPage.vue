@@ -19,8 +19,8 @@ export default {
     errorMessage: "",
 
     user: {
-      accessToken: "",
       email: "",
+      accessToken: "",
     },
   }),
 
@@ -34,7 +34,7 @@ export default {
           this.user.accessToken = data.user.accessToken;
           this.saveToStorage(this.user);
 
-          this.$emit("addFeedback", data);
+          this.$router.push({ name: "start" }).catch(() => {});
         })
         .catch((error) => {
           console.log("addFeedback-firebase-error.message:", error.message);
