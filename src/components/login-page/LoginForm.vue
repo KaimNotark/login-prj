@@ -85,8 +85,16 @@ export default {
     },
 
     createAccount() {
-      console.log("btn createAccount this.eMailValue", this.eMailValue);
-      console.log("btn createAccount this.passwordValue", this.passwordValue);
+      this.validation();
+
+      if (this.isFormValid) {
+        const payload = {
+          email: this.eMailValue,
+          password: this.passwordValue,
+        };
+
+        this.$emit("createAccount", payload);
+      }
     },
   },
 };
