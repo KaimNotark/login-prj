@@ -11,7 +11,6 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-// import { getAcc, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   name: "LoginPage",
@@ -76,8 +75,6 @@ export default {
     },
 
     createAccount({ email, password }) {
-      console.log("{ email, password }", email, password);
-
       const auth = getAuth();
 
       createUserWithEmailAndPassword(auth, email, password)

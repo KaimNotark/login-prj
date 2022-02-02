@@ -20,11 +20,19 @@ export default {
     },
 
     isLogin: false,
+    isStorageEmpty: true,
   }),
 
   mounted() {
     this.getDataFromLocalStorage();
-    this.isUserLogin();
+    this.checkStorage();
+
+    if (this.isStorageEmpty) {
+      this.isLogin = false;
+    } else {
+      this.isUserLogin();
+    }
+
     this.pageSelection();
   },
 
@@ -40,6 +48,10 @@ export default {
 
     isUserLogin() {
       this.isLogin = this.user.accessToken === "" ? false : true;
+    },
+
+    checkStorage() {
+      this.isStorageEmpty = this.user.accessToken === undefined ? true : false;
     },
 
     pageSelection() {
