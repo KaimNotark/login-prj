@@ -1,12 +1,16 @@
 <template>
   <div class="login-page-container">
-    <LoginForm @addFeedback="addFeedback" />
+    <LoginForm @addFeedback="addFeedback" @createAccount="createAccount" />
   </div>
 </template>
 
 <script>
 import LoginForm from "./LoginForm.vue";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 export default {
   name: "LoginPage",
@@ -28,13 +32,10 @@ export default {
 
       signInWithEmailAndPassword(auth, email, password)
         .then((data) => {
-          this.user.email = data.user.email;
-          this.user.accessToken = data.user.accessToken;
-          this.saveToStorage(this.user);
-
-          this.$router.push({ name: "start" }).catch(() => {});
+          this.saveToStorageAndOpenStartPage(data);
         })
         .catch((error) => {
+          console.log("addFeedback-firebase-error.message:", error.code);
           console.log("addFeedback-firebase-error.message:", error.message);
           this.showErrorToast(error.code);
         });
@@ -59,8 +60,11 @@ export default {
         case "auth/wrong-password":
           this.makeToast("Пароль не верный.");
           break;
+        case "auth/email-already-in-use":
+          this.makeToast("Аккаунт с таким E-mail уже есть.");
+          break;
         default:
-          this.makeToast("Пароль или E-mail не правельные.");
+          this.makeToast("Что-то пошло не так, попробуйте ещё раз.");
           break;
       }
     },
@@ -68,6 +72,28 @@ export default {
     saveToStorage({ email, accessToken }) {
       localStorage.email = email;
       localStorage.accessToken = accessToken;
+    },
+
+    createAccount({ email, password }) {
+      const auth = getAuth();
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((data) => {
+          this.saveToStorageAndOpenStartPage(data);
+        })
+        .catch((error) => {
+          console.log("user not created--error.code", error.code);
+          console.log("user not created--error.message", error.message);
+          this.showErrorToast(error.code);
+        });
+    },
+
+    saveToStorageAndOpenStartPage(data) {
+      this.user.email = data.user.email;
+      this.user.accessToken = data.user.accessToken;
+      this.saveToStorage(this.user);
+
+      this.$router.push({ name: "start" }).catch(() => {});
     },
   },
 };

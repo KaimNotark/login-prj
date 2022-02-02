@@ -19,9 +19,15 @@
       <hr class="form-devider" />
 
       <div class="form-footer">
-        <button type="submit" class="form-footer__submit-button">
-          Войти
+        <button
+          type="button"
+          class="form-footer__account-button"
+          @click="createAccount"
+        >
+          Создать АККАУНТ
         </button>
+
+        <button type="submit" class="form-footer__submit-button">Войти</button>
       </div>
     </form>
   </div>
@@ -76,6 +82,29 @@ export default {
 
         event.target.reset();
       }
+    },
+
+    createAccount() {
+      this.validation();
+
+      if (this.isFormValid) {
+        const payload = {
+          email: this.eMailValue,
+          password: this.passwordValue,
+        };
+
+        this.$emit("createAccount", payload);
+      } else {
+        this.makeToast("Заполните все поля.");
+      }
+    },
+
+    makeToast(errorMessage) {
+      this.$bvToast.toast(errorMessage, {
+        title: "Ошибка",
+        autoHideDelay: 5000,
+        toaster: "b-toaster-bottom-center",
+      });
     },
   },
 };
@@ -142,7 +171,7 @@ export default {
 
   &-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     width: 496px;
     height: 68px;
     left: 0px;
@@ -152,7 +181,7 @@ export default {
     &__submit-button {
       width: 150px;
       height: 36px;
-      margin: 0px -16px 16px 0px;
+      margin-left: 145px;
       border: solid 1px $color-button-background-blue;
       background: $color-button-background-blue;
       border-radius: 6px;
@@ -175,6 +204,37 @@ export default {
       border: 1px solid #3c8e96;
     }
     &__submit-button:active {
+      border: 2px solid #53c6d1;
+      background-color: #ffffff;
+      color: #53c6d1;
+    }
+
+    &__account-button {
+      width: 215px;
+      height: 36px;
+      border: solid 1px $color-button-background-blue;
+      background: $color-button-background-gray;
+      border-radius: 6px;
+      color: $color-button-background-blue;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 1px;
+      transition: background-color 0.1s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+    &__account-button:hover {
+      border-color: #3c8e96;
+      background-color: #3c8e96;
+      color: $color-white;
+    }
+    &__account-button:focus {
+      outline: none;
+      border: 1px solid #3c8e96;
+    }
+    &__account-button:active {
       border: 2px solid #53c6d1;
       background-color: #ffffff;
       color: #53c6d1;
