@@ -63,6 +63,8 @@ export default {
       value: "",
       isValid: false,
     },
+
+    value: "",
   }),
 
   methods: {

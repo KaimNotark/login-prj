@@ -16,8 +16,6 @@ export default {
   },
 
   data: () => ({
-    errorMessage: "",
-
     user: {
       email: "",
       accessToken: "",
@@ -25,10 +23,10 @@ export default {
   }),
 
   methods: {
-    async addFeedback({ email, password }) {
+    addFeedback({ email, password }) {
       const auth = getAuth();
 
-      await signInWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then((data) => {
           this.user.email = data.user.email;
           this.user.accessToken = data.user.accessToken;
@@ -38,34 +36,33 @@ export default {
         })
         .catch((error) => {
           console.log("addFeedback-firebase-error.message:", error.message);
-
-          switch (error.code) {
-            case "auth/invalid-email":
-              this.errorMessage = "E-mail не верный.";
-              this.makeToast();
-              break;
-            case "auth/user-not-found":
-              this.errorMessage = "Нет пользователя с таким E-mail.";
-              this.makeToast();
-              break;
-            case "auth/wrong-password":
-              this.errorMessage = "Пароль не верный.";
-              this.makeToast();
-              break;
-            default:
-              this.errorMessage = "Пароль или E-mail не правельные.";
-              this.makeToast();
-              break;
-          }
+          this.showErrorToast(error.code);
         });
     },
 
-    makeToast() {
-      this.$bvToast.toast(this.errorMessage, {
+    makeToast(errorMessage) {
+      this.$bvToast.toast(errorMessage, {
         title: "Ошибка",
         autoHideDelay: 5000,
         toaster: "b-toaster-bottom-center",
       });
+    },
+
+    showErrorToast(errorCode) {
+      switch (errorCode) {
+        case "auth/invalid-email":
+          this.makeToast("E-mail не верный.");
+          break;
+        case "auth/user-not-found":
+          this.makeToast("Нет пользователя с таким E-mail.");
+          break;
+        case "auth/wrong-password":
+          this.makeToast("Пароль не верный.");
+          break;
+        default:
+          this.makeToast("Пароль или E-mail не правельные.");
+          break;
+      }
     },
 
     saveToStorage({ email, accessToken }) {
