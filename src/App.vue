@@ -56,9 +56,13 @@ export default {
 
     pageSelection() {
       if (this.isLogin) {
-        this.$router.push({ name: "start" }).catch(() => {});
+        if (this.$route.path != "/") {
+          this.$router.push({ name: "start" });
+        }
       } else {
-        this.$router.push({ name: "login" }).catch(() => {});
+        if (this.$route.path != "/login") {
+          this.$router.push({ name: "login" });
+        }
       }
     },
   },
