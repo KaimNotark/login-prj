@@ -93,9 +93,7 @@ export default {
       this.user.accessToken = data.user.accessToken;
       this.saveToStorage(this.user);
 
-      if (this.$route.path != "/") {
-        this.$router.push({ name: "start" });
-      }
+      if (this.$route.path != "/") this.$router.push({ name: "start" });
     },
   },
 };
