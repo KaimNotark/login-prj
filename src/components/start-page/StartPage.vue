@@ -26,11 +26,15 @@
 
     <main class="main">
       <div class="main-container">
+        <p class="main-text">Имеется уже созданный аккаунт:</p>
         <p class="main-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error fuga
-          asperiores quo necessitatibus accusantium facilis consectetur
-          consequuntur, cum distinctio nam adipisci dicta quos reiciendis rem
-          libero et molestiae aut aliquid.
+          <span class="__bold">E-mail: </span> logintask@firebase.com
+        </p>
+        <p class="main-text">
+          <span class="__bold">Password: </span> 123456789
+        </p>
+        <p class="main-text">
+          Его можно использовать для проверки входа. Или создайте новый.
         </p>
       </div>
     </main>
@@ -165,5 +169,8 @@ export default {
 }
 .__red {
   color: red;
+}
+.__bold {
+  font-weight: 600;
 }
 </style>

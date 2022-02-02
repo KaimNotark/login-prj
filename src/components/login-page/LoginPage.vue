@@ -61,6 +61,9 @@ export default {
         case "auth/wrong-password":
           this.makeToast("Пароль не верный.");
           break;
+        case "auth/email-already-in-use":
+          this.makeToast("Аккаунт с таким E-mail уже есть.");
+          break;
         default:
           this.makeToast("Что-то пошло не так, попробуйте ещё раз.");
           break;

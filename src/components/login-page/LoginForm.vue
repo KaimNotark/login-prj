@@ -94,7 +94,17 @@ export default {
         };
 
         this.$emit("createAccount", payload);
+      } else {
+        this.makeToast("Заполните все поля.");
       }
+    },
+
+    makeToast(errorMessage) {
+      this.$bvToast.toast(errorMessage, {
+        title: "Ошибка",
+        autoHideDelay: 5000,
+        toaster: "b-toaster-bottom-center",
+      });
     },
   },
 };
