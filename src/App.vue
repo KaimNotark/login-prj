@@ -2,7 +2,7 @@
   <div id="app">
     <div id="wrapper" class="wrapper">
       <transition name="fade">
-        <router-view @goToStartPage="goToStartPage" />
+        <router-view @goToStart="goToStart" />
       </transition>
     </div>
   </div>
@@ -24,9 +24,7 @@ export default {
   }),
 
   mounted() {
-    if (this.$route.path != "/404") {
-      this.goToStartPage();
-    }
+    if (this.$route.path != "/404") this.goToStart();
   },
 
   methods: {
@@ -51,7 +49,7 @@ export default {
       }
     },
 
-    goToStartPage() {
+    goToStart() {
       this.getUserFromLocalStorage();
       this.checkStorage();
 

@@ -1,7 +1,7 @@
 <template>
   <div class="not-found-container">
     <p class="not-found-text">Страница не найдена.</p>
-    <button type="button" class="not-found-button" @click="goStartPage">
+    <button type="button" class="not-found-button" @click="goStart">
       На стартовую страницу.
     </button>
   </div>
@@ -12,9 +12,8 @@ export default {
   name: "NotFoundPage",
 
   methods: {
-    goStartPage() {
-      // this.$router.push({ name: "start" });
-      this.$emit("goToStartPage");
+    goStart() {
+      this.$emit("goToStart");
     },
   },
 };
