@@ -24,13 +24,15 @@ export default {
   }),
 
   mounted() {
-    this.getUserFromLocalStorage();
-    this.checkStorage();
+    if (this.$route.path != "/404") {
+      this.getUserFromLocalStorage();
+      this.checkStorage();
 
-    if (this.isStorageEmpty) this.isLogin = false;
-    else this.checkUserLogin();
+      if (this.isStorageEmpty) this.isLogin = false;
+      else this.checkUserLogin();
 
-    this.pageSelection();
+      this.pageSelection();
+    }
   },
 
   methods: {
