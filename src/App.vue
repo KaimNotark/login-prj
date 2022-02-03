@@ -24,29 +24,24 @@ export default {
   }),
 
   mounted() {
-    this.getDataFromLocalStorage();
-    this.checkStorage();
+    if (this.$route.path != "/404") {
+      this.getUserFromLocalStorage();
+      this.checkStorage();
 
-    if (this.isStorageEmpty) {
-      this.isLogin = false;
-    } else {
-      this.isUserLogin();
+      if (this.isStorageEmpty) this.isLogin = false;
+      else this.checkUserLogin();
+
+      this.pageSelection();
     }
-
-    this.pageSelection();
   },
 
   methods: {
-    addFeedback(data) {
-      console.log("App.", data);
-    },
-
-    getDataFromLocalStorage() {
+    getUserFromLocalStorage() {
       this.user.email = localStorage.email;
       this.user.accessToken = localStorage.accessToken;
     },
 
-    isUserLogin() {
+    checkUserLogin() {
       this.isLogin = this.user.accessToken === "" ? false : true;
     },
 
@@ -56,9 +51,9 @@ export default {
 
     pageSelection() {
       if (this.isLogin) {
-        this.$router.push({ name: "start" }).catch(() => {});
+        if (this.$route.path != "/") this.$router.push({ name: "start" });
       } else {
-        this.$router.push({ name: "login" }).catch(() => {});
+        if (this.$route.path != "/login") this.$router.push({ name: "login" });
       }
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="login-page-container">
-    <LoginForm @addFeedback="addFeedback" @createAccount="createAccount" />
+    <LoginForm @signIn="signIn" @createAccount="createAccount" />
   </div>
 </template>
 
@@ -27,16 +27,17 @@ export default {
   }),
 
   methods: {
-    addFeedback({ email, password }) {
+    signIn({ email, password }) {
       const auth = getAuth();
 
       signInWithEmailAndPassword(auth, email, password)
         .then((data) => {
-          this.saveToStorageAndOpenStartPage(data);
+          this.saveUserToStorage(data);
+          this.openStartPage();
         })
         .catch((error) => {
-          console.log("addFeedback-firebase-error.message:", error.code);
-          console.log("addFeedback-firebase-error.message:", error.message);
+          console.log("user not login--error.message:", error.code);
+          console.log("user not login--error.message:", error.message);
           this.showErrorToast(error.code);
         });
     },
@@ -79,7 +80,8 @@ export default {
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((data) => {
-          this.saveToStorageAndOpenStartPage(data);
+          this.saveUserToStorage(data);
+          this.openStartPage();
         })
         .catch((error) => {
           console.log("user not created--error.code", error.code);
@@ -88,12 +90,14 @@ export default {
         });
     },
 
-    saveToStorageAndOpenStartPage(data) {
+    saveUserToStorage(data) {
       this.user.email = data.user.email;
       this.user.accessToken = data.user.accessToken;
       this.saveToStorage(this.user);
+    },
 
-      this.$router.push({ name: "start" }).catch(() => {});
+    openStartPage() {
+      if (this.$route.path != "/") this.$router.push({ name: "start" });
     },
   },
 };
