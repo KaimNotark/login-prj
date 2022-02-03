@@ -2,7 +2,7 @@
   <div id="app">
     <div id="wrapper" class="wrapper">
       <transition name="fade">
-        <router-view />
+        <router-view @goToStartPage="goToStartPage" />
       </transition>
     </div>
   </div>
@@ -25,13 +25,7 @@ export default {
 
   mounted() {
     if (this.$route.path != "/404") {
-      this.getUserFromLocalStorage();
-      this.checkStorage();
-
-      if (this.isStorageEmpty) this.isLogin = false;
-      else this.checkUserLogin();
-
-      this.pageSelection();
+      this.goToStartPage();
     }
   },
 
@@ -55,6 +49,16 @@ export default {
       } else {
         if (this.$route.path != "/login") this.$router.push({ name: "login" });
       }
+    },
+
+    goToStartPage() {
+      this.getUserFromLocalStorage();
+      this.checkStorage();
+
+      if (this.isStorageEmpty) this.isLogin = false;
+      else this.checkUserLogin();
+
+      this.pageSelection();
     },
   },
 };

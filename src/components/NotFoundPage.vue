@@ -13,7 +13,8 @@ export default {
 
   methods: {
     goStartPage() {
-      this.$router.push({ name: "start" });
+      // this.$router.push({ name: "start" });
+      this.$emit("goToStartPage");
     },
   },
 };
