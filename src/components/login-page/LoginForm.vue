@@ -78,7 +78,7 @@ export default {
           password: this.passwordValue,
         };
 
-        this.$emit("addFeedback", payload);
+        this.$emit("signIn", payload);
 
         event.target.reset();
       }

@@ -24,29 +24,22 @@ export default {
   }),
 
   mounted() {
-    this.getDataFromLocalStorage();
+    this.getUserFromLocalStorage();
     this.checkStorage();
 
-    if (this.isStorageEmpty) {
-      this.isLogin = false;
-    } else {
-      this.isUserLogin();
-    }
+    if (this.isStorageEmpty) this.isLogin = false;
+    else this.checkUserLogin();
 
     this.pageSelection();
   },
 
   methods: {
-    addFeedback(data) {
-      console.log("App.", data);
-    },
-
-    getDataFromLocalStorage() {
+    getUserFromLocalStorage() {
       this.user.email = localStorage.email;
       this.user.accessToken = localStorage.accessToken;
     },
 
-    isUserLogin() {
+    checkUserLogin() {
       this.isLogin = this.user.accessToken === "" ? false : true;
     },
 
