@@ -2,15 +2,6 @@
   <div class="start-page-container">
     <header class="header">
       <div class="header-container">
-        <p class="header-text">
-          Пользователь:
-          <span class="header-text__word __green" v-if="!isLogin">{{
-            email
-          }}</span>
-          <span class="header-text__word __red" v-if="isLogin"
-            >Отсутствует</span
-          >
-        </p>
         <button class="header-button" @click="logout" v-if="!isLogin">
           Выйти
         </button>
@@ -21,6 +12,8 @@
         >
           Войти
         </button>
+
+        <img :src="avatarUrl" alt="Аватар" class="header-avatar" />
       </div>
     </header>
 
@@ -35,6 +28,16 @@
         </p>
         <p class="main-text">
           Его можно использовать для проверки входа. Или создайте новый.
+        </p>
+
+        <p class="header-text__e-mail">
+          E-mail текущего пользователя: &nbsp; &nbsp;
+          <span class="header-text__word __green" v-if="!isLogin">{{
+            email
+          }}</span>
+          <span class="header-text__word __red" v-if="isLogin"
+            >Отсутствует</span
+          >
         </p>
       </div>
     </main>
@@ -52,19 +55,31 @@ export default {
   data: () => ({
     isLogin: false,
     email: "",
+    avatarUrl: "https://imgholder.ru/36x36/ffffff/53C6D1.gif&text=...&fz=26",
   }),
 
   methods: {
     logout() {
       this.isLogin = !this.isLogin;
+      this.avatarUrl =
+        "https://imgholder.ru/36x36/ffffff/53C6D1.gif&text=...&fz=26";
 
       localStorage.email = "";
       localStorage.accessToken = "";
+    },
+
+    createAvatarUrl(text) {
+      if (text[0])
+        this.avatarUrl =
+          `https://imgholder.ru/36x36/ffffff/53C6D1.gif&text=` +
+          text[0].toUpperCase() +
+          `&fz=26`;
     },
   },
 
   created() {
     this.email = localStorage.email;
+    this.createAvatarUrl(this.email);
   },
 };
 </script>
@@ -96,7 +111,15 @@ export default {
 
   &-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+  }
+
+  &-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    margin: 7px 17px 7px 0px;
+    border: 2px solid #53c6d1;
   }
 
   &-button {
@@ -136,6 +159,12 @@ export default {
     font-weight: 600;
 
     &__word {
+      font-weight: 600;
+    }
+
+    &__e-mail {
+      @extend %text;
+      margin-top: 60px;
       font-weight: 600;
     }
   }
